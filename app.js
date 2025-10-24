@@ -4,6 +4,7 @@ import authRoutes from './routes/authRoutes.js';
 import routes from './routes/routes.js'
 import connectDB from './config/db.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 //import multer from 'multer';
 
 dotenv.config({path: '../../.env'});
