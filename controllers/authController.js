@@ -87,12 +87,13 @@ const authController = {
                 {expiresIn: '7d'}
             );
             console.log('\tGenerated tokens');
+            const isProduction = process.env.NODE_ENV === 'production';
             await res.cookie('jwt', refreshToken, {
                                                         httpOnly: true,
                                                         maxAge: 7*24*60*60*1000,
                                                         path: '/',
-                                                        sameSite: 'Lax',
-                                                        secure: false
+                                                        sameSite: isProduction ? 'none' : 'Lax',
+                                                        secure: isProduction
                                                     });
             console.log('\tSent refresh token cookie');
             return res.status(200).json({success: true, 'message': 'Login successful!', 'accessToken': accessToken, uid: foundUser._id});
@@ -110,14 +111,13 @@ const authController = {
                 process.env.REFRESH_TOKEN_SECRET,
                 {expiresIn: '7d'}
             );
-
+        const isProduction = process.env.NODE_ENV === 'production';
         await res.cookie('jwt', refreshToken, {
                                                         httpOnly: true,
                                                         maxAge: 1,
                                                         path: '/',
-                                                        sameSite: 'Lax',
-                                                        secure: false
-                                                    });
+                                                        sameSite: isProduction ? 'none' : 'Lax',
+                                                        secure: isProduction                                                    });
         console.log('\tSuccessfully logged out');
         return res.status(200).json({success: true, 'message': 'Logout successful!'});
     },

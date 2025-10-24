@@ -6,7 +6,7 @@ import cors from 'cors';
 const router = Router();
 
 const corsOptions = {
-  origin: ['http://localhost:5173','http://localhost:8080'],
+  origin: ['http://localhost:5173','http://localhost:8080', 'projectx-app.up.railway.app'],
   //origin: true,
   credentials: true,
   methods: ['GET','POST','OPTIONS','DELETE'],
