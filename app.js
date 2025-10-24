@@ -18,7 +18,7 @@ const PORT = 8080;
 //   allowedHeaders: ['Content-Type','Authorization']
 // }));
 
-
+const isProduction = process.env.NODE_ENV === 'production';
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use('/auth', authRoutes);
 app.use('/api', routes);
 
-app.listen(PORT, () => {
+app.listen(PORT, isProduction ? '0.0.0.0' : 'localhost',() => {
     connectDB();
     console.log(`Server is running on http://localhost:${PORT}`);
 });
