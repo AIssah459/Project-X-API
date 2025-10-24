@@ -5,8 +5,23 @@ import cors from 'cors';
 
 const router = Router();
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:8080',
+  'https://projectx-app.up.railway.app',
+  'https://project-x-20h.pages.dev'
+];
+
 const corsOptions = {
-  origin: ['http://localhost:5173','http://localhost:8080', 'https://projectx-app.up.railway.app', 'https://project-x-20h.pages.dev'],
+  origin: function (origin, callback) {
+    // allow requests with no origin like mobile apps or curl
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   //origin: true,
   credentials: true,
   methods: ['GET','POST','OPTIONS','DELETE'],
