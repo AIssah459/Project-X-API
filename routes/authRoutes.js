@@ -13,7 +13,7 @@ const corsOptions = {
 };
 
 const publicCors = cors({
-  origin: ['http://localhost:5173','http://localhost:8080', 'https://projectx-app.up.railway.app', 'https://projectxapp.netlify.app'],
+  origin: ['http://localhost:5173','http://localhost:8080', 'https://projectx-app.up.railway.app', 'https://projectxapp.netlify.app/'],
   credentials: false, // 👈 No cookie required
   methods: ['GET', 'POST', 'OPTIONS', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
