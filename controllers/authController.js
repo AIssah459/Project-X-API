@@ -87,7 +87,9 @@ const authController = {
                 {expiresIn: '7d'}
             );
             console.log('\tGenerated tokens');
+            console.log(process.env.NODE_ENV);
             const isProduction = process.env.NODE_ENV === 'production';
+            console.log(`Is this production? ${isProduction}`);
             await res.cookie('jwt', refreshToken, {
                                                         httpOnly: true,
                                                         maxAge: 7*24*60*60*1000,
