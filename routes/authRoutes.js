@@ -13,6 +13,7 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
+    console.log('CORS request origin:', origin);
     // allow requests with no origin like mobile apps or curl
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) {
@@ -30,6 +31,7 @@ const corsOptions = {
 const publicCors = cors({
   origin: function (origin, callback) {
     // allow requests with no origin like mobile apps or curl
+    console.log('CORS request origin:', origin);
     if (!origin) return callback(null, true);
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
