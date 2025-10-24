@@ -28,26 +28,15 @@ const corsOptions = {
   allowedHeaders: ['Content-Type','Authorization']
 };
 
-const publicCors = cors({
-  origin: function (origin, callback) {
-    // allow requests with no origin like mobile apps or curl
-    console.log('CORS request origin:', origin);
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: false, // 👈 No cookie required
-  methods: ['GET', 'POST', 'OPTIONS', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-});
+router.use(cors(corsOptions));
+router.options('*', cors(corsOptions));
 
-router.post('/login', publicCors, authController.loginPost);
-router.post('/logout', cors(corsOptions), authController.logoutPost);
-router.post('/signup', publicCors, authController.signupPost);
-router.post('/checkauth', cors(corsOptions), authController.checkAuthPost);
-router.post('/refresh', cors(corsOptions), authController.refreshPost);
+
+
+router.post('/login', authController.loginPost);
+router.post('/logout', authController.logoutPost);
+router.post('/signup', authController.signupPost);
+router.post('/checkauth', authController.checkAuthPost);
+router.post('/refresh', authController.refreshPost);
 
 export default router;
