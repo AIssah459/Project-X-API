@@ -19,7 +19,7 @@ const publicCors = cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 });
 
-router.post('/login', publicCors(corsOptions), authController.loginPost);
+router.post('/login', publicCors, authController.loginPost);
 router.post('/logout', cors(corsOptions), authController.logoutPost);
 router.post('/signup', publicCors, authController.signupPost);
 router.post('/checkauth', cors(corsOptions), authController.checkAuthPost);
