@@ -90,13 +90,18 @@ const authController = {
             console.log(process.env.NODE_ENV);
             const isProduction = process.env.NODE_ENV === 'production';
             console.log(`Is this production? ${isProduction}`);
-            await res.cookie('jwt', refreshToken, {
-                                                        httpOnly: true,
-                                                        maxAge: 7*24*60*60*1000,
-                                                        path: '/',
-                                                        sameSite: isProduction ? 'none' : 'Lax',
-                                                        secure: isProduction
-                                                    });
+
+            const cookieOptions = {
+                httpOnly: true,
+                maxAge: 7*24*60*60*1000,
+                path: '/',
+                sameSite: isProduction ? 'none' : 'Lax',
+                secure: isProduction 
+            }
+
+            console.log(cookieOptions);
+            
+            await res.cookie('jwt', refreshToken, {cookieOptions});
             console.log('\tSent refresh token cookie');
             return res.status(200).json({success: true, 'message': 'Login successful!', 'accessToken': accessToken, uid: foundUser._id});
         }
